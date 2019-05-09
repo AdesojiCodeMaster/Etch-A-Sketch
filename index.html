@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Etch-A-Sketch</title>
+	<style>
+    
+    .reset:hover{background-color:red;}
+    .container:active{background-color:red;}
+
+		html {
+		    box-sizing: border-box;
+		}
+		*, *:before, *:after {
+		    box-sizing: inherit;
+		}
+		
+		.reset{
+			font-size:xx-large;
+			display: block;
+			background-color: greenyellow;
+			border: 2px solid black;
+			padding: 5px;
+            width: 500px;
+			margin: 5px auto;
+            height: 70px;
+            box-shadow: 5px 2.5px blue;
+            text-shadow: 1.5px 3px red;
+		}
+		}
+		.container {
+			margin: 5px auto;
+            border: 1px solid black;
+            width: 500px;
+            
+		}
+		
+		.container:after {
+			content: "";
+			display: block;
+			clear: both;
+            
+		}
+		.grid {display:grid;
+			border: 1px solid black;
+			float: right;
+            background-color: aqua;
+            background-     color:lightgoldenrodyellow;
+           filter: brightness(90%);
+           
+		}
+       
+	</style>
+</head>
+<body>
+	
+    <button class="reset">Reset the grids</button>
+    <div class= "container"></div>
+	
+    <script>
+		
+		function createGrids(side) {
+			const container = document.querySelector(".container");
+            for (var i = 1; i < side*side; i++) {
+				let grid = document.createElement('div');
+				grid.classList.add('grid')
+				gridSize = `${100/side}%`
+				grid.style.width = grid.style.paddingTop = gridSize;
+				grid.dataset.place = i;
+				container.appendChild(grid);
+			}
+			document.body.appendChild(container);
+		}
+		function deleteGrids() {
+			document.querySelector('.container').innerHTML = '';
+		}
+		createGrids(16);
+		document.body.addEventListener('mouseover', (e) => {
+			if (e.target.classList.contains('grid')) {
+				e.target.style.backgroundColor	= 'black';			
+			}
+		});
+		const resetButton = document.querySelector('.reset');
+		resetButton.addEventListener('click', () => {
+			deleteGrids();
+			side = prompt("Enter the number of squares per side to form the new template.");
+			createGrids(side ? side : 16);
+		});
+	</script>
+</body>
+</html>
